@@ -24,7 +24,7 @@ func (this *Api) Version() string {
 	return this.Result
 }
 
-func (this *Api) Setup(host string) *Result {
+func (this *Api) Setup(host string) []*Result {
 	this.Now = ""
 	err,data := this.SetHosts(host).SetOptions(L_m,model.SETUP).Execute().ParseResult()
 	Check(err)

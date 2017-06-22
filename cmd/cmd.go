@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"github.com/lflxp/ansibleapi/utils"
-	"github.com/widuu/gojson"
 	//. "github.com/lflxp/ansibleapi/utils"
 	"errors"
 	"strings"
@@ -63,7 +62,6 @@ type Cmd struct {
 
 type Result struct {
 	Origin 		string //原始结果
-	Json 		*gojson.Js //Json结果集原型
 	Host 		string //目标主机
 	Status 		string 	//状态
 }
@@ -104,12 +102,40 @@ func (this *Cmd) Execute() *Cmd {
 }
 
 //解析结果 返回json数据
-func (this *Cmd) ParseResult() (error,*Result) {
+func (this *Cmd) ParseResult() (error,[]*Result) {
+	result := []*Result{}
 	if this.IsSetHosts == false {
 		return errors.New("未设置目标主机"),nil
 	}
-	result := &Result{}
-	result.Origin = this.Result
-	result.Host = strings.TrimSpace(strings.Split(this.Result,"|")[0])
+	//result := &Result{}
+	//result.Origin = this.Result
+	//result.Host = strings.TrimSpace(strings.Split(this.Result,"|")[0])
+	//start := false
+
+	println(this.Result)
+	for _,x := range strings.Split(this.Result,"=>") {
+		tmprs := Result{}
+		//for _,y := range strings.Split(x,"\n") {
+		//	if strings.Contains(y," | ") {
+		//		tmp = tmp[:0:0]
+		//		println(y)
+		//		t := strings.Split(y,"|")
+		//		tmprs.Host = strings.TrimSpace(t[0])
+		//		tmprs.Status = strings.TrimSpace(strings.Split(t[1]," ")[1])
+		//
+		//	} else {
+		//		tmp = append(tmp,y)
+		//	}
+		//}
+
+		//tmprs.Origin = "{\n"+strings.Join(tmp,"\n")
+		//result = append(result,tmprs)
+		if strings.Contains(x," | ") {
+			t := strings.Split(x," | ")
+			tmprs.Host = strings.TrimSpace(t[0])
+			tmprs.Status = strings.TrimSpace(t[1])
+		}
+	}
+
 	return nil,result
 }
