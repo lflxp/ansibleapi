@@ -1,0 +1,49 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;ansibleapi&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../ip_scan" />
+      <root url="file://$PROJECT_DIR$/../../../services" />
+      <root url="file://$PROJECT_DIR$/../../../Controller" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../../../lxptest" />
+      <root url="file://$PROJECT_DIR$/../../../google.golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../goinone" />
+      <root url="file://$PROJECT_DIR$/../../../easy_install" />
+      <root url="file://$PROJECT_DIR$/../../../installSystem" />
+      <root url="file://$PROJECT_DIR$/../../../cobbler-iqiyi" />
+      <root url="file://$PROJECT_DIR$/../../../go-sync-status" />
+      <root url="file://$PROJECT_DIR$/../../../.idea" />
+      <root url="file://$PROJECT_DIR$/../../../study" />
+      <root url="file://$PROJECT_DIR$/../../../test" />
+      <root url="file://$PROJECT_DIR$/../../../lxp" />
+      <root url="file://$PROJECT_DIR$/../../../gitlab.qiyi.domain" />
+      <root url="file://$PROJECT_DIR$/../../../easy_install_bak" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../ip_scan" />
+      <root url="file://$PROJECT_DIR$/../../../services" />
+      <root url="file://$PROJECT_DIR$/../../../Controller" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../../../lxptest" />
+      <root url="file://$PROJECT_DIR$/../../../google.golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../goinone" />
+      <root url="file://$PROJECT_DIR$/../../../easy_install" />
+      <root url="file://$PROJECT_DIR$/../../../installSystem" />
+      <root url="file://$PROJECT_DIR$/../../../cobbler-iqiyi" />
+      <root url="file://$PROJECT_DIR$/../../../go-sync-status" />
+      <root url="file://$PROJECT_DIR$/../../../.idea" />
+      <root url="file://$PROJECT_DIR$/../../../study" />
+      <root url="file://$PROJECT_DIR$/../../../test" />
+      <root url="file://$PROJECT_DIR$/../../../lxp" />
+      <root url="file://$PROJECT_DIR$/../../../gitlab.qiyi.domain" />
+      <root url="file://$PROJECT_DIR$/../../../easy_install_bak" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
