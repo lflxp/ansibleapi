@@ -24,9 +24,23 @@ func (this *Api) Version() string {
 	return this.Result
 }
 
-func (this *Api) Setup(host string) []*Result {
+func (this *Api) Setup(host string) map[string]*Result {
 	this.Now = ""
 	err,data := this.SetHosts(host).SetOptions(L_m,model.SETUP).Execute().ParseResult()
+	Check(err)
+	return data
+}
+
+func (this *Api) ScriptA(host,path string) map[string]*Result {
+	this.Now = ""
+	err,data := this.SetHosts(host).SetOptions(L_m,model.SCRIPT).SetOptions(L_a,path).Execute().ParseResult()
+	Check(err)
+	return data
+}
+
+func (this *Api) Copy(host,src,dest,mode,owner string) map[string]*Result {
+	this.Now = ""
+	err,data := this.SetHosts(host).SetOptions(L_m,model.COPY).SetCopyOptions(L_a,src,dest,mode,owner).Execute().ParseResult()
 	Check(err)
 	return data
 }

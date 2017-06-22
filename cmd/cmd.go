@@ -79,6 +79,12 @@ func (this *Cmd) SetOptions(key,value string) *Cmd {
 	return this
 }
 
+//设置COPY选项
+func (this *Cmd) SetCopyOptions(key,src,dest,mode,owner string) *Cmd {
+	this.Now += fmt.Sprintf("%s 'src=%s dest=%s mode=%s owner=%s'",key,src,dest,mode,owner)
+	return this
+}
+
 //设置目标主机
 func (this *Cmd) SetHosts(host string) *Cmd {
 	this.Host = host
@@ -88,7 +94,7 @@ func (this *Cmd) SetHosts(host string) *Cmd {
 
 //获取执行命令
 func (this *Cmd) GetCmd() string {
-	return fmt.Sprintf("%s %s %s",this.Command,this.Host,this.Now)
+	return fmt.Sprintf("%s %s \"%s\"",this.Command,this.Host,this.Now)
 }
 
 //执行命令
@@ -102,38 +108,26 @@ func (this *Cmd) Execute() *Cmd {
 }
 
 //解析结果 返回json数据
-func (this *Cmd) ParseResult() (error,[]*Result) {
-	result := []*Result{}
+func (this *Cmd) ParseResult() (error,map[string]*Result) {
+	result := map[string]*Result{}
 	if this.IsSetHosts == false {
 		return errors.New("未设置目标主机"),nil
 	}
-	//result := &Result{}
-	//result.Origin = this.Result
-	//result.Host = strings.TrimSpace(strings.Split(this.Result,"|")[0])
-	//start := false
 
-	println(this.Result)
-	for _,x := range strings.Split(this.Result,"=>") {
-		tmprs := Result{}
-		//for _,y := range strings.Split(x,"\n") {
-		//	if strings.Contains(y," | ") {
-		//		tmp = tmp[:0:0]
-		//		println(y)
-		//		t := strings.Split(y,"|")
-		//		tmprs.Host = strings.TrimSpace(t[0])
-		//		tmprs.Status = strings.TrimSpace(strings.Split(t[1]," ")[1])
-		//
-		//	} else {
-		//		tmp = append(tmp,y)
-		//	}
-		//}
-
-		//tmprs.Origin = "{\n"+strings.Join(tmp,"\n")
-		//result = append(result,tmprs)
-		if strings.Contains(x," | ") {
-			t := strings.Split(x," | ")
-			tmprs.Host = strings.TrimSpace(t[0])
-			tmprs.Status = strings.TrimSpace(t[1])
+	origin_data := strings.Split(this.Result,"=>")
+	for num,x := range origin_data {
+		tmprs := &Result{}
+		//println(num,x)
+		if num + 2 <= len(origin_data) {
+			tmp := strings.Split(x,"\n")
+			tmp_status := strings.Split(tmp[len(tmp)-1]," | ")
+			//println(tmp[len(tmp)-1],tmp_status)
+			tmprs.Host = strings.TrimSpace(tmp_status[0])
+			tmprs.Status = strings.TrimSpace(tmp_status[1])
+			//按\n划分 去掉最后一个
+			ttt := strings.Split(origin_data[num+1],"\n")
+			tmprs.Origin = strings.Join(ttt[:len(ttt)-1],"\n")
+			result[tmprs.Host] = tmprs
 		}
 	}
 
