@@ -15,6 +15,10 @@ func main() {
 	//println(tmp["10.6.200.121"].Status)
 	//println(tmp["10.6.200.121"].Origin)
 
-	tmp := api.Playbooks.PlayBook("all","/root/init.yml","-v")
+	//tmp := api.Playbooks.PlayBook("all","/root/init.yml","-v")
+	//println(tmp)
+
+
+	tmp := api.Playbooks.By().SetOptions("/root/init.yml","-v").SetOptions("--extra-vars","\"hosts=10.6.200.121 user=root\"").ExecutePlayBookByRemote().GetResult()
 	println(tmp)
 }

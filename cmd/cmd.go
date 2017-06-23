@@ -103,12 +103,22 @@ func (this *Cmd) SetHosts(host string) *Cmd {
 }
 
 //获取执行命令
-func (this *Cmd) GetCmd() string {
+func (this *Cmd) GetCmdByRemote() string {
 	return fmt.Sprintf("%s %s \"%s\"",this.Command,this.Host,this.Now)
 }
 
+//获取执行命令
+func (this *Cmd) GetCmdByLocal() string {
+	return fmt.Sprintf("%s %s %s",this.Command,this.Host,this.Now)
+}
+
 //获取playbook执行命令
-func (this *Cmd) GetPlayBookCmd() string {
+func (this *Cmd) GetPlayBookCmdByRemote() string {
+	return fmt.Sprintf("%s '%s'",this.Command,this.Now)
+}
+
+//获取playbook执行命令
+func (this *Cmd) GetPlayBookCmdByLocal() string {
 	return fmt.Sprintf("%s %s",this.Command,this.Now)
 }
 
@@ -118,19 +128,35 @@ func (this *Cmd) GetResult() string {
 }
 
 //执行命令
-func (this *Cmd) Execute() *Cmd {
+func (this *Cmd) ExecuteByRemote() *Cmd {
 	if this.IsSetHosts == false {
 		this.Result = "未设置目标主机"
 		return this
 	}
-	this.Result = utils.ExecCommand(this.GetCmd())
+	this.Result = utils.ExecCommand(this.GetCmdByRemote())
+	return this
+}
+
+//执行命令
+func (this *Cmd) ExecuteByLocal() *Cmd {
+	if this.IsSetHosts == false {
+		this.Result = "未设置目标主机"
+		return this
+	}
+	this.Result = utils.ExecCommand(this.GetCmdByLocal())
 	return this
 }
 
 
 //执行playbook命令
-func (this *Cmd) ExecutePlayBook() *Cmd {
-	this.Result = utils.ExecCommand(this.GetPlayBookCmd())
+func (this *Cmd) ExecutePlayBookByRemote() *Cmd {
+	this.Result = utils.ExecCommand(this.GetPlayBookCmdByRemote())
+	return this
+}
+
+//执行playbook命令
+func (this *Cmd) ExecutePlayBookByLocal() *Cmd {
+	this.Result = utils.ExecCommand(this.GetPlayBookCmdByLocal())
 	return this
 }
 
