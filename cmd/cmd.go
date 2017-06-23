@@ -10,6 +10,7 @@ import (
 
 const (
 	AnsibleCmd = "ssh root@10.6.200.131 ansible"
+	PlayBookCmd = "ssh root@10.6.200.131 ansible-playbook"
 	P = "-P"
 	private_key = "--private-key"
 	T = "-T"
@@ -52,6 +53,7 @@ const (
 	L_s = "-s"
 )
 
+//执行结构体
 type Cmd struct {
 	Command		string  //执行命令
 	Host 		string 	//目标主机
@@ -60,6 +62,7 @@ type Cmd struct {
 	IsSetHosts 	bool //是否设置了目标主机
 }
 
+//结果集结构体
 type Result struct {
 	Origin 		string //原始结果
 	Host 		string //目标主机
@@ -70,6 +73,13 @@ type Result struct {
 //初始化是否设置主机为否
 func (this *Cmd) Init() {
 	this.Command = AnsibleCmd
+	this.IsSetHosts = false
+}
+
+//初始化 ansible命令执行结果
+//初始化是否设置主机为否
+func (this *Cmd) PlayBookInit() {
+	this.Command = PlayBookCmd
 	this.IsSetHosts = false
 }
 
@@ -97,6 +107,16 @@ func (this *Cmd) GetCmd() string {
 	return fmt.Sprintf("%s %s \"%s\"",this.Command,this.Host,this.Now)
 }
 
+//获取playbook执行命令
+func (this *Cmd) GetPlayBookCmd() string {
+	return fmt.Sprintf("%s %s",this.Command,this.Now)
+}
+
+//获取playbook执行结果
+func (this *Cmd) GetResult() string {
+	return this.Result
+}
+
 //执行命令
 func (this *Cmd) Execute() *Cmd {
 	if this.IsSetHosts == false {
@@ -104,6 +124,13 @@ func (this *Cmd) Execute() *Cmd {
 		return this
 	}
 	this.Result = utils.ExecCommand(this.GetCmd())
+	return this
+}
+
+
+//执行playbook命令
+func (this *Cmd) ExecutePlayBook() *Cmd {
+	this.Result = utils.ExecCommand(this.GetPlayBookCmd())
 	return this
 }
 
