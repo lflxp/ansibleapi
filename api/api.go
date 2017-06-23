@@ -10,11 +10,11 @@ type Api struct {
 	Cmd
 }
 
-var Apis Api
-
-func init() {
-	Apis = Api{}
-	Apis.Init()
+//初始化 ansible命令执行结果
+//初始化是否设置主机为否
+func (this *Api) Init() {
+	this.Command = AnsibleCmd
+	this.IsSetHosts = false
 }
 
 func (this *Api) Version() string {

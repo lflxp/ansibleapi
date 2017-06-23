@@ -69,20 +69,6 @@ type Result struct {
 	Status 		string 	//状态
 }
 
-//初始化 ansible命令执行结果
-//初始化是否设置主机为否
-func (this *Cmd) Init() {
-	this.Command = AnsibleCmd
-	this.IsSetHosts = false
-}
-
-//初始化 ansible命令执行结果
-//初始化是否设置主机为否
-func (this *Cmd) PlayBookInit() {
-	this.Command = PlayBookCmd
-	this.IsSetHosts = false
-}
-
 //设置选项
 func (this *Cmd) SetOptions(key,value string) *Cmd {
 	this.Now += fmt.Sprintf("%s %s ",key,value)

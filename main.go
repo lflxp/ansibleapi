@@ -18,7 +18,8 @@ func main() {
 	//tmp := api.Playbooks.PlayBook("all","/root/init.yml","-v")
 	//println(tmp)
 
-
-	tmp := api.Playbooks.By().SetOptions("/root/init.yml","-v").SetOptions("--extra-vars","\"hosts=10.6.200.121 user=root\"").ExecutePlayBookByRemote().GetResult()
-	println(tmp)
+	tmp := api.Playbook{}
+	tmp.PlayBookInit()
+	tmp.By().SetOptions("/root/init.yml","-v").SetOptions("--extra-vars","\"hosts=10.6.200.121 user=root\"").ExecutePlayBookByRemote()
+	println(tmp.GetResult())
 }

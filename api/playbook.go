@@ -1,16 +1,17 @@
 package api
 
+import . "github.com/lflxp/ansibleapi/cmd"
+
 type Playbook struct {
 	Api
 }
 
-var Playbooks Playbook
-
-func init() {
-	Playbooks = Playbook{}
-	Playbooks.PlayBookInit()
+//初始化 ansible命令执行结果
+//初始化是否设置主机为否
+func (this *Playbook) PlayBookInit() {
+	this.Command = PlayBookCmd
+	this.IsSetHosts = false
 }
-
 func (this *Playbook) PlayBook(path,args string) string {
 	this.Now = ""
 	return this.SetOptions(path,args).ExecutePlayBookByRemote().GetResult()
