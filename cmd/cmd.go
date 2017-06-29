@@ -100,7 +100,7 @@ func (this *Cmd) GetCmdByLocal() string {
 
 //获取playbook执行命令
 func (this *Cmd) GetPlayBookCmdByRemote() string {
-	return fmt.Sprintf("%s '%s'",this.Command,this.Now)
+	return fmt.Sprintf("%s %s",this.Command,this.Now)
 }
 
 //获取playbook执行命令
