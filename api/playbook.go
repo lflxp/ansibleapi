@@ -14,7 +14,8 @@ func (this *Playbook) PlayBookInit() {
 }
 func (this *Playbook) PlayBook(path,args string) string {
 	this.Now = ""
-	return this.SetOptions(path,args).ExecutePlayBookByRemote().GetResult()
+	this.SetOptions(path,args).ExecutePlayBookByRemote()
+	return this.GetResult()
 }
 
 func (this *Playbook) By() *Playbook {

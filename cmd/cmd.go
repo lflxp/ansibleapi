@@ -136,7 +136,7 @@ func (this *Cmd) ExecuteByLocal() *Cmd {
 
 //执行playbook命令
 func (this *Cmd) ExecutePlayBookByRemote() bool {
-	var err error
+	var err bool
 	this.Result,err = utils.ExecCommand(this.GetPlayBookCmdByRemote())
 	return err
 }
