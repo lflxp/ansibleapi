@@ -11,11 +11,12 @@ func Check(e error) {
 	}
 }
 
-func ExecCommand(commands string) string {
+func ExecCommand(commands string) (string,bool) {
 	println(commands)
 	out,err := exec.Command("bash", "-c", commands).Output()
 	if err != nil {
 	    	fmt.Println(err.Error())
+		return err.Error(),true
 	}
-	return string(out)
+	return string(out),false
 }

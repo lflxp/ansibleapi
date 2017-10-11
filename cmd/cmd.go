@@ -119,7 +119,7 @@ func (this *Cmd) ExecuteByRemote() *Cmd {
 		this.Result = "未设置目标主机"
 		return this
 	}
-	this.Result = utils.ExecCommand(this.GetCmdByRemote())
+	this.Result,_ = utils.ExecCommand(this.GetCmdByRemote())
 	return this
 }
 
@@ -129,20 +129,21 @@ func (this *Cmd) ExecuteByLocal() *Cmd {
 		this.Result = "未设置目标主机"
 		return this
 	}
-	this.Result = utils.ExecCommand(this.GetCmdByLocal())
+	this.Result,_ = utils.ExecCommand(this.GetCmdByLocal())
 	return this
 }
 
 
 //执行playbook命令
-func (this *Cmd) ExecutePlayBookByRemote() *Cmd {
-	this.Result = utils.ExecCommand(this.GetPlayBookCmdByRemote())
-	return this
+func (this *Cmd) ExecutePlayBookByRemote() bool {
+	var err errors
+	this.Result,err = utils.ExecCommand(this.GetPlayBookCmdByRemote())
+	return err
 }
 
 //执行playbook命令
 func (this *Cmd) ExecutePlayBookByLocal() *Cmd {
-	this.Result = utils.ExecCommand(this.GetPlayBookCmdByLocal())
+	this.Result,_ = utils.ExecCommand(this.GetPlayBookCmdByLocal())
 	return this
 }
 
